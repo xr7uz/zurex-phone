@@ -6,7 +6,7 @@ name 'zurex-phone'
 author 'Zurex'
 description 'Zurex XR7 phone: 216 apps, social, trading, games, services. QBCore / Qbox / ESX / standalone.'
 version '2.0.0'
--- repository 'https://github.com/<user>/zurex-phone'
+repository 'https://github.com/xr7uz/zurex-phone'
 
 shared_script 'config.lua'
 
