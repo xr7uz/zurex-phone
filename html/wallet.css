@@ -1,0 +1,73 @@
+/* Bank cards, Zurex Pay, payment sheet, Face ID. */
+.zcard { position: relative; aspect-ratio: 1.586; border-radius: 16px; padding: 14px 16px; display: flex; flex-direction: column; justify-content: space-between; overflow: hidden; isolation: isolate; color: #fff; text-align: left;
+  box-shadow: 0 18px 40px -18px rgba(0,0,0,.9), inset 0 1px 0 rgba(255,255,255,.25), inset 0 0 0 1px rgba(255,255,255,.08); }
+.zcard::after { content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none; background: linear-gradient(115deg, transparent 30%, rgba(255,255,255,.18) 45%, transparent 60%); mix-blend-mode: overlay; }
+.zc-top, .zc-bot { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.zc-brand { display: flex; align-items: center; gap: 6px; } .zc-brand .zlogo { width: 22px; height: 22px; } .zc-brand b { font-family: 'Dela Gothic One'; font-weight: 400; font-size: 13px; letter-spacing: .02em; }
+.zc-type { font-size: 9px; letter-spacing: .16em; text-transform: uppercase; opacity: .8; font-weight: 700; }
+.zc-mid { display: flex; align-items: center; gap: 10px; } .zc-chip { width: 38px; height: 28px; } .zc-nfc { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.8; opacity: .75; }
+.zc-num { font-family: ui-monospace, 'Zen Kaku Gothic New', monospace; font-size: 15px; letter-spacing: .12em; text-shadow: 0 1px 1px rgba(0,0,0,.35); }
+.zc-bot { font-size: 9.5px; letter-spacing: .12em; font-weight: 700; opacity: .9; } .zc-bot span:first-child { flex: 1; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.zc-net { font-family: 'Dela Gothic One'; font-weight: 400; font-size: 13px; letter-spacing: 0; } .zc-net i { font-style: normal; color: var(--signal); margin-left: 1px; }
+.zc-frozen { position: absolute; inset: 0; display: grid; place-items: center; background: rgba(11,8,10,.55); backdrop-filter: blur(3px) grayscale(1); font-weight: 700; letter-spacing: .3em; font-size: 12px; }
+.zcard.frozen { filter: grayscale(.7); }
+/* Materials */
+.d-plum { background: radial-gradient(120% 90% at 100% 0%, rgba(244,114,182,.7), transparent 55%), radial-gradient(80% 70% at 0% 100%, rgba(168,85,247,.35), transparent 60%), linear-gradient(150deg, #2a1622, #0e090c); }
+.d-plum::before { content: ''; position: absolute; inset: 0; z-index: -1; background-image: linear-gradient(rgba(255,255,255,.06) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.06) 1px, transparent 1px); background-size: 14px 14px; mask-image: linear-gradient(135deg, transparent 40%, #000); }
+.d-zebra { background: radial-gradient(70% 60% at 85% 20%, rgba(244,114,182,.55), transparent 60%), repeating-linear-gradient(-32deg, #0b080a 0 9px, #f2eef0 9px 13px, #0b080a 13px 20px, #f9a8d4 20px 22px); }
+.d-zebra .zc-num, .d-zebra .zc-bot, .d-zebra .zc-top { background: rgba(11,8,10,.72); border-radius: 8px; padding: 2px 6px; align-self: flex-start; }
+.d-zebra .zc-top, .d-zebra .zc-bot { align-self: stretch; }
+.d-gold { color: #3a2a0a; background: repeating-linear-gradient(90deg, rgba(255,255,255,.08) 0 1px, transparent 1px 3px), linear-gradient(135deg, #f6e3a1 0%, #d4a843 35%, #f9e7b0 55%, #b8862b 80%, #e9cc7a 100%); }
+.d-gold .zc-net i { color: #7a5a1a; }
+.d-black { background: radial-gradient(90% 70% at 85% 15%, rgba(255,255,255,.12), transparent 60%), repeating-linear-gradient(45deg, #121214 0 2px, #0b0b0d 2px 4px); color: #e5e5e5; }
+.d-black .zc-num, .d-black .zc-brand b { background: linear-gradient(180deg, #fff, #9ca3af); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.d-frost { background: linear-gradient(140deg, rgba(255,255,255,.28), rgba(255,255,255,.06)); backdrop-filter: blur(14px) saturate(140%); border: 1px solid rgba(255,255,255,.35); }
+.d-frost::before { content: ''; position: absolute; inset: -30%; z-index: -1; background: conic-gradient(from 200deg, rgba(94,234,212,.35), rgba(196,181,253,.35), rgba(244,114,182,.35), rgba(94,234,212,.35)); filter: blur(30px); }
+.d-teal { background: radial-gradient(100% 80% at 100% 0%, rgba(94,234,212,.45), transparent 60%), linear-gradient(150deg, #0f3b3a, #071816); }
+/* Bank: card rail */
+.card-rail { display: grid; grid-auto-flow: column; grid-auto-columns: 84%; gap: 10px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; margin: 0 -22px; padding: 4px 22px 12px; }
+.card-rail::-webkit-scrollbar { display: none; } .card-rail .zcard { scroll-snap-align: center; cursor: pointer; }
+.add-card { align-items: center; justify-content: center; gap: 8px; background: rgba(242,238,240,.04); border: 1.5px dashed var(--rule-strong); box-shadow: none; color: var(--paper-2); font-weight: 700; font-size: 13px; }
+.add-card svg { width: 28px; height: 28px; stroke: var(--app-tint); }
+.acct-line { display: flex; justify-content: space-between; align-items: baseline; padding: 4px 4px 10px; } .acct-line b { font-family: 'Dela Gothic One'; font-weight: 400; font-size: 26px; }
+.card-hero { padding: 6px 0 14px; } .zcard.big { box-shadow: 0 30px 60px -24px var(--app-tint), inset 0 1px 0 rgba(255,255,255,.25); }
+.order-card { display: grid; grid-template-columns: 120px 1fr; gap: 12px; padding: 12px; margin-bottom: 10px; border-radius: 20px; background: rgba(23,19,22,.6); border: 1px solid var(--sep); }
+.zcard.mini { padding: 7px 8px; border-radius: 9px; align-self: start; } .zcard.mini .zc-brand .zlogo { width: 12px; height: 12px; } .zcard.mini .zc-brand b, .zcard.mini .zc-net { font-size: 7px; }
+.zcard.mini .zc-type, .zcard.mini .zc-bot span { display: none; } .zcard.mini .zc-chip { width: 16px; height: 12px; } .zcard.mini .zc-nfc { width: 8px; height: 8px; } .zcard.mini .zc-num { font-size: 6.5px; }
+.oc-info b { font-size: 15px; } .oc-info p { font-size: 12px; color: var(--paper-2); margin: 2px 0 4px; } .oc-info .btn { height: 38px; margin-top: 8px; font-size: 12px; }
+/* Wallet stack */
+.wallet-stack { position: relative; height: calc(56vw); max-height: 330px; min-height: 260px; margin-bottom: 8px; }
+.wallet-stack .zcard.stack { position: absolute; left: 0; right: 0; top: calc(var(--i) * 44px); transition: transform var(--d-ui) var(--ease-spring), top var(--d-ui) var(--ease-out); cursor: pointer; }
+.wallet-stack .zcard.stack.sel { z-index: 20; transform: translateY(-6px) scale(1.02); box-shadow: 0 26px 50px -18px var(--signal), inset 0 1px 0 rgba(255,255,255,.25); }
+.pay-ready { display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 14px 0 6px; }
+.pay-ready b { font-family: 'Dela Gothic One'; font-weight: 400; font-size: 18px; } .pay-ready .s { font-size: 12px; color: var(--paper-3); }
+.nfc-ring { position: relative; width: 74px; height: 74px; display: grid; place-items: center; margin-bottom: 6px; }
+.nfc-ring svg { width: 28px; height: 28px; stroke: var(--paper); z-index: 1; }
+.nfc-ring span { position: absolute; inset: 0; border-radius: 50%; border: 1.5px solid var(--signal); animation: nfc 2.4s var(--ease-out) infinite; opacity: 0; }
+.nfc-ring span:nth-child(2) { animation-delay: .8s; } .nfc-ring span:nth-child(3) { animation-delay: 1.6s; }
+@keyframes nfc { 0% { transform: scale(.4); opacity: .9; } 100% { transform: scale(1.4); opacity: 0; } }
+.send-amount { display: flex; justify-content: center; align-items: baseline; gap: 4px; padding: 18px 0 6px; }
+.send-amount span { font-family: 'Dela Gothic One'; font-size: 30px; color: var(--paper-3); }
+.send-amount input { width: 70%; background: none; border: 0; outline: none; text-align: center; font-family: 'Dela Gothic One'; font-size: 56px; color: var(--paper); }
+/* Payment sheet */
+.pay-sheet { z-index: 70; } .pay-sheet .sheet-card { text-align: center; }
+.ps-merchant { display: flex; align-items: center; gap: 12px; text-align: left; margin-bottom: 4px; }
+.ps-logo { width: 44px; height: 44px; border-radius: 12px; display: grid; place-items: center; font-family: 'Dela Gothic One'; font-size: 20px; background: linear-gradient(150deg, var(--ink-700), var(--ink-900)); border: 1px solid var(--rule-strong); }
+.ps-merchant b { display: block; font-size: 16px; } .ps-merchant .s { font-size: 12px; color: var(--paper-3); }
+.ps-amount { font-family: 'Dela Gothic One'; font-size: 44px; margin: 10px 0 14px; }
+.zcard.pay { width: 78%; margin: 0 auto 10px; }
+.pay-done { padding: 30px 0 24px; display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.pd-check { width: 76px; height: 76px; border-radius: 50%; display: grid; place-items: center; background: #34d399; box-shadow: 0 0 40px -6px #34d399; animation: pop .45s var(--ease-spring); }
+.pd-check svg { width: 40px; height: 40px; stroke: #062; stroke-width: 3; }
+.pay-done b { font-family: 'Dela Gothic One'; font-weight: 400; font-size: 24px; }
+/* Face ID */
+.face-id { position: absolute; inset: 0; z-index: 80; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px; background: rgba(11,8,10,.6); backdrop-filter: blur(22px); animation: fade var(--d-ui) var(--ease-out); }
+.fid-frame { position: relative; width: 120px; height: 120px; }
+.fid-face { width: 100%; height: 100%; fill: none; stroke: #fff; stroke-width: 3.2; stroke-linecap: round; }
+.fid-feat { opacity: 0; animation: fidIn .5s .35s var(--ease-out) forwards; }
+@keyframes fidIn { to { opacity: 1; } }
+.fid-scan { position: absolute; left: 16%; right: 16%; top: 14%; height: 2px; border-radius: 2px; background: linear-gradient(90deg, transparent, #5eead4, transparent); box-shadow: 0 0 14px #5eead4; animation: fidScan 1s var(--ease-in-out) infinite alternate; }
+@keyframes fidScan { to { top: 84%; } }
+.face-id.ok .fid-face { stroke: #34d399; filter: drop-shadow(0 0 12px #34d399); } .face-id.ok .fid-scan { display: none; }
+.fid-label { font-size: 15px; letter-spacing: .02em; }
+.oc-info .btn.armed { background: var(--signal); color: var(--ink-950); border-color: transparent; }

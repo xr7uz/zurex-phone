@@ -1,0 +1,13 @@
+{
+  "name": "zurex-phone",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Zurex XR7 phone for FiveM: 215 apps, social, trading, games and services.",
+  "scripts": {
+    "dev": "node tools/serve.js 5190",
+    "check": "node tools/check.js"
+  },
+  "devDependencies": {
+    "luaparse": "0.3.1"
+  }
+}

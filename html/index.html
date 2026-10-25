@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#0B080A" />
+  <title>Zurex Phone</title>
+  <link rel="stylesheet" href="style.css?v=2.0.2" />
+  <link rel="stylesheet" href="apps.css?v=2.0.2" />
+  <link rel="stylesheet" href="games.css?v=2.0.2" />
+  <link rel="stylesheet" href="wallet.css?v=2.0.2" />
+</head>
+<body>
+  <!-- Presentation stage: only visible outside FiveM (mockup mode). -->
+  <div class="stage" id="stage">
+    <div class="stage-floor" aria-hidden="true"></div>
+    <header class="stage-top">
+      <span class="tag"><b class="mark">Z</b> ZUREX // MOBILE OS</span>
+      <span class="tag right">BUILD <span id="stageBuild"></span><br /><span id="stageClock">--:--:--</span></span>
+    </header>
+    <div class="stage-copy">
+      <p class="eyebrow">01 — Zurex XR7 Serie</p>
+      <h1 class="chrome">Dein Leben.<br />Eine Oberfläche.</h1>
+      <p class="lede">Social, Trading, Games und die ganze Stadt in einem Gerät. Gebaut auf der XR7UZ-Designsprache: ruhig, präzise, pink.</p>
+      <ul class="specs">
+        <li><span>Apps</span><b id="stageApps">200+</b></li>
+        <li><span>Modelle</span><b>03</b></li>
+        <li><span>Runtime</span><b>FiveM NUI</b></li>
+      </ul>
+      <div class="model-switch" id="stageSwitch"></div>
+      <p class="tag model-name" id="stageModel"></p>
+    </div>
+    <!-- Back of the device: full-width camera plateau. -->
+    <div class="device-back" id="deviceBack" aria-hidden="true">
+      <div class="plateau">
+        <span class="lens l1"></span><span class="lens l2"></span><span class="lens l3"></span>
+        <span class="flash"></span><span class="lidar"></span>
+      </div>
+      <span class="back-logo">Z</span>
+      <span class="back-name">XR7</span>
+    </div>
+    <footer class="stage-bottom"><span class="tag">TRACK / TALK / TRADE / PLAY</span></footer>
+  </div>
+
+  <div class="device-wrap" id="deviceWrap">
+    <div class="device" id="device">
+      <span class="btn-side action" aria-hidden="true"></span>
+      <span class="btn-side vol-up" aria-hidden="true"></span>
+      <span class="btn-side vol-down" aria-hidden="true"></span>
+      <span class="btn-side power" aria-hidden="true"></span>
+      <span class="btn-side cam-ctrl" aria-hidden="true"></span>
+      <div class="device-glow"></div>
+      <div class="screen" id="screen" data-wall="grid">
+        <div class="wall"><div class="wall-floor"></div></div>
+
+        <div class="statusbar" id="statusbar">
+          <span class="sb-time" id="sbTime">--:--</span>
+          <div class="island" id="island"><span class="island-dot"></span><span class="island-text" id="islandText"></span></div>
+          <span class="sb-right">
+            <span class="sb-carrier" id="sbCarrier">ZRX</span>
+            <svg class="sb-signal" viewBox="0 0 18 12" aria-hidden="true"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="5.5" width="3" height="6.5" rx="1"/><rect x="10" y="3" width="3" height="9" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/></svg>
+            <svg class="sb-plane" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5z"/></svg>
+            <span class="sb-batt"><span id="sbBattFill"></span></span>
+          </span>
+        </div>
+
+        <!-- Boot -->
+        <section class="layer boot" id="boot">
+          <div class="boot-logo"><div class="orbit"></div><div class="orbit o2"></div><span class="glass-z">Z</span></div>
+          <div class="boot-meter">
+            <div class="boot-row"><span>BOOT SEQUENCE</span><span id="bootStep">STEP 1 / 4</span></div>
+            <div class="bar"><i id="bootBar"></i></div>
+            <div class="boot-row"><span id="bootMsg">Kernel wird geladen</span><span id="bootTime">0.0 s</span></div>
+          </div>
+          <p class="boot-pct"><span>ZUREX</span><b id="bootPct">0%</b></p>
+        </section>
+
+        <!-- Lock -->
+        <section class="layer lock" id="lock" hidden>
+          <p class="lock-date" id="lockDate"></p>
+          <p class="lock-time chrome" id="lockTime">--:--</p>
+          <ul class="lock-notes" id="lockNotes"></ul>
+          <button class="lock-handle" id="lockHandle" type="button" aria-label="Entsperren">
+            <span class="chev"></span><span>Nach oben wischen</span>
+          </button>
+        </section>
+
+        <!-- Home: page 1 (widgets), app pages, library -->
+        <section class="layer home" id="home" hidden>
+          <div class="home-viewport" id="homeViewport">
+            <div class="home-track" id="homeTrack">
+              <div class="hpage first" data-page="0">
+                <div class="home-head"><span class="tag">ZUREX // HOME</span><span class="tag" id="homeGreeting"></span></div>
+                <button class="widget" type="button" data-open="bank">
+                  <div class="w-top"><span class="tag">ZUREX BANK</span><span class="chip">Live</span></div>
+                  <p class="w-balance" id="wBalance">€0</p>
+                  <svg class="w-spark" id="wSpark" viewBox="0 0 300 54" preserveAspectRatio="none"></svg>
+                  <div class="w-foot"><span id="wDelta"></span><span class="tag">7 TAGE</span></div>
+                </button>
+                <div class="w-row">
+                  <button class="widget mini" type="button" data-open="calendar" id="wAgenda"></button>
+                  <button class="widget mini" type="button" data-open="tradr" id="wPulse"></button>
+                </div>
+                <div class="grid" id="appGrid"></div>
+              </div>
+              <div class="home-pages" id="homePages"></div>
+            </div>
+          </div>
+          <div class="page-dots" id="pageDots"></div>
+          <div class="ticker" aria-hidden="true"><div class="ticker-track" id="ticker"></div></div>
+          <nav class="dock" id="dock"></nav>
+        </section>
+
+        <!-- App container -->
+        <section class="layer app" id="app" hidden>
+          <div class="app-aura" aria-hidden="true"><i></i><i></i><span class="app-mark" id="appMark"></span></div>
+          <header class="app-head">
+            <button class="back" id="appBack" type="button" aria-label="Zurück">‹</button>
+            <div class="app-titles"><span class="eyebrow" id="appEyebrow"></span><h2 id="appTitle"></h2></div>
+            <div class="app-action" id="appAction"></div>
+          </header>
+          <div class="app-body" id="appBody"></div>
+        </section>
+
+        <!-- Call overlay -->
+        <section class="layer call" id="call" hidden>
+          <div class="call-avatar" id="callAvatar"></div>
+          <p class="call-name" id="callName"></p>
+          <p class="call-state" id="callState"></p>
+          <div class="call-wave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          <div class="call-ctrls">
+            <button type="button" class="cbtn" data-toggle="mute"><span data-i="mic"></span><small>Stumm</small></button>
+            <button type="button" class="cbtn" data-toggle="speaker"><span data-i="speaker"></span><small>Lautspr.</small></button>
+            <button type="button" class="cbtn" data-toggle="hold"><span data-i="pause"></span><small>Halten</small></button>
+          </div>
+          <div class="call-answer" id="callAnswer" hidden>
+            <button type="button" class="end-call" id="declineCall" aria-label="Ablehnen"><span data-i="hangup"></span></button>
+            <button type="button" class="accept-call" id="acceptCall" aria-label="Annehmen"><span data-i="phone"></span></button>
+          </div>
+          <button type="button" class="end-call" id="endCall" aria-label="Auflegen"><span data-i="hangup"></span></button>
+        </section>
+
+        <div class="toast" id="toast" role="status" aria-live="polite"></div>
+        <button class="home-bar" id="homeBar" type="button" aria-label="Home"></button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/icons.js?v=2.0.2"></script>
+  <script src="js/core.js?v=2.0.2"></script>
+  <script src="js/localserver.js?v=2.0.2"></script>
+  <script src="js/apps-core.js?v=2.0.2"></script>
+  <script src="js/apps-settings.js?v=2.0.2"></script>
+  <script src="js/network.js?v=2.0.2"></script>
+  <script src="js/wallet.js?v=2.0.2"></script>
+  <script src="js/engines-social.js?v=2.0.2"></script>
+  <script src="js/engines-finance.js?v=2.0.2"></script>
+  <script src="js/engines-city.js?v=2.0.2"></script>
+  <script src="js/engines-tools.js?v=2.0.2"></script>
+  <script src="js/games.js?v=2.0.2"></script>
+  <script src="js/games-arcade.js?v=2.0.2"></script>
+  <script src="js/games-puzzle.js?v=2.0.2"></script>
+  <script src="js/engines-ext.js?v=2.0.2"></script>
+  <script src="data/docs.js?v=2.0.2"></script>
+  <script src="js/registry.js?v=2.0.2"></script>
+  <script>ZX.start();</script>
+</body>
+</html>
